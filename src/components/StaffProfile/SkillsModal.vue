@@ -4,35 +4,40 @@
     v-model:visible="internalVisible"
     modal
     class="w-full max-w-[900px]"
-    :style="{ maxWidth: '600px' }"
+    :style="{ maxWidth: '700px' }"
     @hide="closeDialog"
   >
     <div class="formgrid grid">
       <div class="field col-12 md:col-6">
         <div class="field col">
           <label for="firstName">First Name</label>
-          <InputText v-model="localStaff.firstName" id="firstName" disabled />
+          <InputText
+            v-model="localStaff.firstName"
+            id="firstName"
+            disabled
+            class="w-full md:w-80"
+          />
         </div>
       </div>
       <div class="field col-12 md:col-6">
         <div class="field col">
           <label for="lastName">Last Name</label>
-          <InputText v-model="localStaff.lastName" id="lastName" disabled />
+          <InputText v-model="localStaff.lastName" id="lastName" disabled class="w-full md:w-80" />
         </div>
       </div>
       <div class="field col-12 md:col-6">
         <div class="field col">
-          <label for="phone">Phone</label>
-          <InputText v-model="localStaff.phone" id="phone" disabled />
+          <label for="phoneNumber">Phone Number</label>
+          <InputText v-model="localStaff.phone" id="phoneNumber" disabled class="w-full md:w-80" />
         </div>
       </div>
       <div class="field col-12 md:col-6">
         <div class="field col">
           <label for="email">Email</label>
-          <InputText v-model="localStaff.email" id="email" disabled />
+          <InputText v-model="localStaff.email" id="email" disabled class="w-full md:w-80" />
         </div>
       </div>
-      <div class="field col-12 md:col-4">
+      <div class="field col-12 md:col-6">
         <div class="field col">
           <label for="Specialism">Specialism</label>
           <Select
@@ -41,10 +46,10 @@
             optionLabel="label"
             optionValue="value"
             placeholder="Select Employment Type"
+            class="w-full md:w-80"
           />
         </div>
       </div>
-      <div class="field col-12 md:col-2"></div>
       <div class="field col-12 md:col-6">
         <div class="field col">
           <label for="clinicType">Languages</label>
@@ -56,13 +61,15 @@
             placeholder="Select Language"
             display="chip"
             filter
+            :maxSelectedLabels="5"
+            class="w-full md:w-80"
             :class="{ 'p-invalid': !!formErrors.languageIds }"
           />
+          <small v-if="formErrors.languageIds" class="p-error">{{ formErrors.languageIds }}</small>
         </div>
-        <small v-if="formErrors.languageIds" class="p-error">{{ formErrors.languageIds }}</small>
       </div>
 
-      <div class="field col-12 md:col-4">
+      <div class="field col-12 md:col-6">
         <div class="field col">
           <label for="location">Location</label>
           <MultiSelect
@@ -72,11 +79,13 @@
             optionValue="value"
             placeholder="Select Location"
             filter
+            display="chip"
+            :maxSelectedLabels="2"
+            class="w-full md:w-80"
           />
         </div>
       </div>
-      <div class="field col-12 md:col-2"></div>
-      <div class="field col-12 md:col-4">
+      <div class="field col-12 md:col-6">
         <div class="field col">
           <label for="userRole">User Role</label>
           <Select
@@ -85,6 +94,7 @@
             optionLabel="label"
             optionValue="value"
             placeholder="Select User Type"
+            class="w-full md:w-80"
           />
         </div>
       </div>
@@ -99,11 +109,13 @@
             placeholder="Select Clinic Type"
             display="chip"
             filter
+            :maxSelectedLabels="2"
+            class="w-full md:w-80"
           />
         </div>
       </div>
 
-      <div class="field col-12 md:col-4">
+      <div class="field col-12 md:col-6">
         <div class="field col">
           <label for="employmentType">Employment Type</label>
           <Select
@@ -112,13 +124,14 @@
             optionLabel="label"
             optionValue="value"
             placeholder="Select Employment Type"
+            class="w-full md:w-80"
           />
         </div>
       </div>
-      <div class="field col-12 md:col-8">
+      <div class="field col-12 md:col-12">
         <div class="field col">
           <label for="miscellaneous">Miscellaneous</label>
-          <Textarea v-model="localStaff.miscellaneous" rows="5" cols="50" />
+          <Textarea v-model="localStaff.miscellaneous" rows="5" cols="50" class="w-full md:w-80" />
         </div>
       </div>
     </div>
@@ -136,7 +149,7 @@ import { ref, watch } from 'vue'
 import Dialog from 'primevue/dialog'
 import InputText from 'primevue/inputtext'
 import MultiSelect from 'primevue/multiselect'
-import Select from 'primevue/select';
+import Select from 'primevue/select'
 import Button from 'primevue/button'
 import { useToast } from 'primevue/usetoast'
 import { useStaffStore } from '@/stores/staff'
