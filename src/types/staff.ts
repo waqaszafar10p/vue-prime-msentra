@@ -12,13 +12,22 @@ export interface Availability {
 export interface Staff {
   id: number
   name: string
+  firstName: string
+  lastName: string
   email: string
-  clinicType: number[] // or number for single select
-  location: number[] // or number
+  phone: string
+  locationIds: number[] // for v-model
+  locations: LookupItem[] // from API
+  clinicTypeIds: number[] // for v-model
+  clinicTypes: LookupItem[] // from API
+  languageIds: number[] // for v-model
+  languages: LookupItem[] // from API
   userRole: string
   status: boolean
   availability: AvailabilityRange[]
-  employmentType: string // e.g. 'full_time', 'part_time', etc.
+  employmentType: string
+  specialism: string
+  miscellaneous:string
 }
 export interface AvailabilityRange {
   location: string
@@ -27,4 +36,9 @@ export interface AvailabilityRange {
   startTime: Date | null
   endTime: Date | null
   days: string[]
+}
+
+export interface LookupItem {
+  id: number
+  name: string
 }

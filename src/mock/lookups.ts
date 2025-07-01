@@ -11,3 +11,10 @@ export const mockClinicTypes = [
   { id: 2, name: 'Pediatrics' },
   { id: 3, name: 'Dermatology' },
 ]
+
+export const mockLanguages = [
+  { id: 1, name: 'English' },
+  { id: 2, name: 'Urdu' },
+  { id: 3, name: 'Punjabi' },
+  { id: 4, name: 'Pashto' },
+]

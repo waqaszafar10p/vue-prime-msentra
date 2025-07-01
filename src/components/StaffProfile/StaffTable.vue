@@ -28,14 +28,19 @@
       <Column field="email" header="Email" />
       <Column header="Location">
         <template #body="{ data }">
-          {{ data.location.map((id: number) => locationMap[id] || 'Unknown').join(', ') }}
+          {{ data.locations.map((loc: any) => loc.name).join(', ') }}
         </template>
       </Column>
       <Column header="Clinic Type">
         <template #body="{ data }">
-          {{ data.clinicType.map((id: number) => clinicTypeMap[id] || 'Unknown').join(', ') }}
+          {{ data.clinicTypes.map((ct: any) => ct.name).join(', ') }}
         </template>
       </Column>
+       <!-- <Column header="Languages">
+        <template #body="{ data }">
+          {{ data.languages.map((ct: any) => ct.name).join(', ') }}
+        </template>
+      </Column> -->
       <Column header="User Role">
         <template #body="{ data }">
           {{ userRoleMap[data.userRole] || data.userRole }}
@@ -102,21 +107,6 @@ const toast = useToast()
 onMounted(() => {
   store.loadStaffList()
   lookupStore.fetchLookups()
-})
-const locationMap = computed(() => {
-  const map: Record<number, string> = {}
-  for (const loc of lookupStore.locations) {
-    map[loc.id] = loc.name
-  }
-  return map
-})
-
-const clinicTypeMap = computed(() => {
-  const map: Record<number, string> = {}
-  for (const ct of lookupStore.clinicTypes) {
-    map[ct.id] = ct.name
-  }
-  return map
 })
 
 const userRoleMap = rolesOptions.reduce<Record<string, string>>((acc, role) => {

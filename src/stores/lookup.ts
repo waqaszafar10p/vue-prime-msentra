@@ -1,4 +1,5 @@
 // src/stores/lookup.ts
+import { mockClinicTypes, mockLanguages, mockLocations } from '@/mock/lookups'
 import { defineStore } from 'pinia'
 
 interface LookupItem {
@@ -10,6 +11,7 @@ export const useLookupStore = defineStore('lookup', {
   state: () => ({
     locations: [] as LookupItem[],
     clinicTypes: [] as LookupItem[],
+    languages: [] as LookupItem[],
     loading: false,
   }),
 
@@ -20,21 +22,15 @@ export const useLookupStore = defineStore('lookup', {
       this.loading = true
       try {
         // Simulated API response (replace with real API calls)
-        const [locationsData, clinicTypesData] = await Promise.all([
-          Promise.resolve([
-            { id: 1, name: 'Lahore' },
-            { id: 2, name: 'Karachi' },
-            { id: 3, name: 'Islamabad' },
-          ]),
-          Promise.resolve([
-            { id: 1, name: 'General' },
-            { id: 2, name: 'Dental' },
-            { id: 3, name: 'Cardiology' },
-          ]),
+        const [locationsData, clinicTypesData, mockLanguagesData] = await Promise.all([
+          Promise.resolve([...mockLocations]),
+          Promise.resolve([...mockClinicTypes]),
+          Promise.resolve([...mockLanguages]),
         ])
 
         this.locations = locationsData
         this.clinicTypes = clinicTypesData
+        this.languages = mockLanguagesData
       } catch (error) {
         console.error('Failed to fetch lookup data:', error)
       } finally {
