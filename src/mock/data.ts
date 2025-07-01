@@ -3,7 +3,7 @@ import type { Staff } from '@/types/staff'
 
 import { mockLocations, mockClinicTypes, mockLanguages } from './lookups' // adjust your import paths
 
-export const mockStaff: Staff[] = Array.from({ length: 20 }, (_, i) => ({
+export const mockStaff: Staff[] = Array.from({ length: 50 }, (_, i) => ({
   id: i + 1,
   name: `Staff Member ${i + 1}`,
   firstName: `Staff`,

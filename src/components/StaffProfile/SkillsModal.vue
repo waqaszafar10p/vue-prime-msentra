@@ -39,7 +39,7 @@
       </div>
       <div class="field col-12 md:col-6">
         <div class="field col">
-          <label for="Specialism">Specialism</label>
+          <label for="Specialism">Specialism<span class="text-red-500">*</span></label>
           <Select
             v-model="localStaff.specialism"
             :options="specialismOptions"
@@ -47,7 +47,9 @@
             optionValue="value"
             placeholder="Select Employment Type"
             class="w-full md:w-80"
+            :class="{ 'p-invalid': !!formErrors.specialism }"
           />
+          <small v-if="formErrors.specialism" class="p-error">{{ formErrors.specialism }}</small>
         </div>
       </div>
       <div class="field col-12 md:col-6">
@@ -61,17 +63,15 @@
             placeholder="Select Language"
             display="chip"
             filter
-            :maxSelectedLabels="5"
+            :maxSelectedLabels="2"
             class="w-full md:w-80"
-            :class="{ 'p-invalid': !!formErrors.languageIds }"
           />
-          <small v-if="formErrors.languageIds" class="p-error">{{ formErrors.languageIds }}</small>
         </div>
       </div>
 
       <div class="field col-12 md:col-6">
         <div class="field col">
-          <label for="location">Location</label>
+          <label for="location">Location<span class="text-red-500">*</span></label>
           <MultiSelect
             v-model="localStaff.locationIds"
             :options="locationOptions"
@@ -82,12 +82,14 @@
             display="chip"
             :maxSelectedLabels="2"
             class="w-full md:w-80"
+            :class="{ 'p-invalid': !!formErrors.locationIds }"
           />
+          <small v-if="formErrors.locationIds" class="p-error">{{ formErrors.locationIds }}</small>
         </div>
       </div>
       <div class="field col-12 md:col-6">
         <div class="field col">
-          <label for="userRole">User Role</label>
+          <label for="userRole">User Role<span class="text-red-500">*</span></label>
           <Select
             v-model="localStaff.userRole"
             :options="rolesOptions"
@@ -95,12 +97,14 @@
             optionValue="value"
             placeholder="Select User Type"
             class="w-full md:w-80"
+            :class="{ 'p-invalid': !!formErrors.userRole }"
           />
+          <small v-if="formErrors.userRole" class="p-error">{{ formErrors.userRole }}</small>
         </div>
       </div>
       <div class="field col-12 md:col-6">
         <div class="field col">
-          <label for="clinicType">Clinic Type</label>
+          <label for="clinicType">Clinic Type<span class="text-red-500">*</span></label>
           <MultiSelect
             v-model="localStaff.clinicTypeIds"
             :options="clinicTypeOptions"
@@ -111,13 +115,17 @@
             filter
             :maxSelectedLabels="2"
             class="w-full md:w-80"
+            :class="{ 'p-invalid': !!formErrors.clinicTypeIds }"
           />
+          <small v-if="formErrors.clinicTypeIds" class="p-error">{{
+            formErrors.clinicTypeIds
+          }}</small>
         </div>
       </div>
 
       <div class="field col-12 md:col-6">
         <div class="field col">
-          <label for="employmentType">Employment Type</label>
+          <label for="employmentType">Employment Type<span class="text-red-500">*</span></label>
           <Select
             v-model="localStaff.employmentType"
             :options="employmentTypeOptions"
@@ -125,7 +133,11 @@
             optionValue="value"
             placeholder="Select Employment Type"
             class="w-full md:w-80"
+            :class="{ 'p-invalid': !!formErrors.employmentType }"
           />
+          <small v-if="formErrors.employmentType" class="p-error">{{
+            formErrors.employmentType
+          }}</small>
         </div>
       </div>
       <div class="field col-12 md:col-12">
@@ -258,10 +270,6 @@ function validateForm(): boolean {
 
   if (!localStaff.value.specialism) {
     formErrors.value.specialism = 'Specialism is required'
-  }
-
-  if (!localStaff.value.languageIds?.length) {
-    formErrors.value.languageIds = 'At least one language is required'
   }
 
   if (!localStaff.value.locationIds?.length) {
