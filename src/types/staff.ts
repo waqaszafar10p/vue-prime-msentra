@@ -27,7 +27,7 @@ export interface Staff {
   availability: AvailabilityRange[]
   employmentType: string
   specialism: string
-  miscellaneous:string
+  miscellaneous: string
 }
 export interface AvailabilityRange {
   location: string

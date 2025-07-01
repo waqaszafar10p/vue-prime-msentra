@@ -35,7 +35,7 @@
       <div class="field col-12 md:col-4">
         <div class="field col">
           <label for="Specialism">Specialism</label>
-          <Dropdown
+          <Select
             v-model="localStaff.specialism"
             :options="specialismOptions"
             optionLabel="label"
@@ -56,8 +56,10 @@
             placeholder="Select Language"
             display="chip"
             filter
+            :class="{ 'p-invalid': !!formErrors.languageIds }"
           />
         </div>
+        <small v-if="formErrors.languageIds" class="p-error">{{ formErrors.languageIds }}</small>
       </div>
 
       <div class="field col-12 md:col-4">
@@ -77,7 +79,7 @@
       <div class="field col-12 md:col-4">
         <div class="field col">
           <label for="userRole">User Role</label>
-          <Dropdown
+          <Select
             v-model="localStaff.userRole"
             :options="rolesOptions"
             optionLabel="label"
@@ -104,7 +106,7 @@
       <div class="field col-12 md:col-4">
         <div class="field col">
           <label for="employmentType">Employment Type</label>
-          <Dropdown
+          <Select
             v-model="localStaff.employmentType"
             :options="employmentTypeOptions"
             optionLabel="label"
@@ -134,7 +136,7 @@ import { ref, watch } from 'vue'
 import Dialog from 'primevue/dialog'
 import InputText from 'primevue/inputtext'
 import MultiSelect from 'primevue/multiselect'
-import Dropdown from 'primevue/dropdown'
+import Select from 'primevue/select';
 import Button from 'primevue/button'
 import { useToast } from 'primevue/usetoast'
 import { useStaffStore } from '@/stores/staff'
@@ -145,7 +147,7 @@ import { useLookupStore } from '@/stores/lookup'
 import { employmentTypeOptions, rolesOptions, specialismOptions } from '@/constants/options'
 import Textarea from 'primevue/textarea'
 const lookupStore = useLookupStore()
-
+const formErrors = ref<Record<string, string>>({})
 onMounted(() => {
   lookupStore.fetchLookups()
 })
@@ -203,6 +205,15 @@ watch(
 )
 
 function saveSkills() {
+  if (!validateForm()) {
+    toast.add({
+      severity: 'error',
+      summary: 'Validation Failed',
+      detail: 'Please fill in all required fields.',
+      life: 3000,
+    })
+    return
+  }
   // map selected ids back to objects for saving
   const locations = lookupStore.locations.filter((loc) =>
     localStaff.value.locationIds.includes(loc.id),
@@ -228,5 +239,34 @@ function saveSkills() {
   })
 
   closeDialog()
+}
+function validateForm(): boolean {
+  formErrors.value = {}
+
+  if (!localStaff.value.specialism) {
+    formErrors.value.specialism = 'Specialism is required'
+  }
+
+  if (!localStaff.value.languageIds?.length) {
+    formErrors.value.languageIds = 'At least one language is required'
+  }
+
+  if (!localStaff.value.locationIds?.length) {
+    formErrors.value.locationIds = 'At least one location is required'
+  }
+
+  if (!localStaff.value.userRole) {
+    formErrors.value.userRole = 'User Role is required'
+  }
+
+  if (!localStaff.value.clinicTypeIds?.length) {
+    formErrors.value.clinicTypeIds = 'At least one clinic type is required'
+  }
+
+  if (!localStaff.value.employmentType) {
+    formErrors.value.employmentType = 'Employment Type is required'
+  }
+
+  return Object.keys(formErrors.value).length === 0
 }
 </script>

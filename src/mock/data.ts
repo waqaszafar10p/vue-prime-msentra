@@ -28,4 +28,5 @@ export const mockStaff: Staff[] = Array.from({ length: 20 }, (_, i) => ({
   availability: [],
   employmentType: i % 2 === 0 ? 'employed' : 'locum',
   specialism: i % 2 === 0 ? 'ophthalmology' : 'gastroenterology',
+  miscellaneous:'Test Comment'
 }))

@@ -77,7 +77,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, computed } from 'vue'
+import { ref, onMounted } from 'vue'
 import { useStaffStore } from '@/stores/staff.ts'
 import { storeToRefs } from 'pinia'
 import DataTable from 'primevue/datatable'
