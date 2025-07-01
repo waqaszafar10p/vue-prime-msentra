@@ -16,6 +16,7 @@ export const useAuthStore = defineStore('auth', {
     },
     logout() {
       this.user = null
+      localStorage.removeItem('redirectPath')
       localStorage.removeItem('token')
     },
     checkAuth() {

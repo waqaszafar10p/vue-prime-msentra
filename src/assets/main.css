@@ -1,3 +1,95 @@
 @import 'primeicons/primeicons.css';
 @import 'primeflex/primeflex.css';
+@import './base.css';
+
+
+/* Reset + Base Styling */
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: system-ui, sans-serif;
+}
+
+#app {
+  height: 100%;
+  width: 100%;
+  font-weight: normal;
+  padding: 0;
+  margin: 0;
+}
+
+/* Links */
+a,
+.green {
+  text-decoration: none;
+  color:   #000;
+  transition: 0.3s;
+  padding: 3px;
+}
+
+a:hover {
+  background-color: hsla(160, 100%, 37%, 0.1);
+}
+.p-panelmenu .p-panelmenu-panel {
+  border: none;
+}
+.p-panelmenu-panel.menu-active .p-menuitem-text {
+  color: #1D4ED8;
+}
+.vuecal__flex.vuecal__menu, .vuecal__title-bar {
+  display: none;
+}
+.p-dropdown-panel .p-dropdown-items .p-dropdown-item.p-highlight {
+  color: #000;
+  background: #fff;
+}
+.p-dropdown:not(.p-disabled).p-focus {
+  border: 1px solid #D1D5DB !important;
+  outline: none !important;
+  box-shadow: none !important; /* Optional: removes glow */
+}
+/* PrimeVue Menu customization (global) */
+
+[data-pc-name="menu"] {
+  background-color: white !important;
+  color: black;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.08);
+  min-width: 160px;
+  padding: 0.5rem 0;
+  z-index: 1001 !important;
+}
+
+/* Remove list styles */
+[data-pc-section="menu"] {
+  padding: 0;
+}
+[data-pc-section="menuitem"] {
+  list-style: none;
+}
+
+/* Style anchor */
+[data-pc-section="action"] {
+  display: flex;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  color: black;
+  text-decoration: none;
+  font-size: 0.9rem;
+  gap: 0.5rem;
+}
+
+/* Hover effect */
+[data-pc-section="action"]:hover {
+  background-color: #f0f0f0;
+  cursor: pointer;
+  color: #000;
+}
+
+/* Icon styling */
+[data-pc-section="icon"] {
+  color: #555;
+}
 

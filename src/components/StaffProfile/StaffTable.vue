@@ -36,7 +36,7 @@
           {{ data.clinicTypes.map((ct: any) => ct.name).join(', ') }}
         </template>
       </Column>
-       <!-- <Column header="Languages">
+      <!-- <Column header="Languages">
         <template #body="{ data }">
           {{ data.languages.map((ct: any) => ct.name).join(', ') }}
         </template>
@@ -64,13 +64,13 @@
           </div>
         </template>
       </Column>
-      <Column header="Availibility">
+      <!-- <Column header="Availibility">
         <template #body="{ data }">
           <div class="flex gap-2">
             <Button icon="pi pi-calendar" severity="warning" @click="editAvailability(data)" />
           </div>
         </template>
-      </Column>
+      </Column> -->
     </DataTable>
     <Toast />
   </div>
